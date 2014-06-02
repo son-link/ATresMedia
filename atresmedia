@@ -108,9 +108,4 @@ if [ $Verbose == true ]; then
    echo "Playing $base$video_src"
 fi
 
-mkfifo /tmp/atresmedia.fifo.mp4 2> /dev/null
-
-rtmpdump -vq -r "$base" -y $video_src 2> /dev/null > /tmp/atresmedia.fifo.mp4 &
-echo $! > /tmp/atresmedia.pid
-mplayer /tmp/atresmedia.fifo.mp4 > /dev/null 2> /dev/null &
-echo $! >> /tmp/atresmedia.pid
+rtmpdump -vq -r "$base" -y $video_src --quiet | vlc - 2> /dev/null >
